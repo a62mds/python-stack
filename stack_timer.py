@@ -1,4 +1,6 @@
 #!/usr/bin/env python3.5
+# Generates a plot of runtimes of the Stack.min() method vs stack depth,
+# demonstrating the O(1) performance of Stack.min()
 from matplotlib import pyplot as plt
 from matplotlib import ticker as tkr
 import numpy as np
@@ -42,14 +44,6 @@ def min_method_timer(stack_depths):
         raise ValueError('Need at least one Stack to check runtime of min')
     stacks = [gen_random_stack(depth) for depth in stack_depths]
     return [timer(stack.min) for stack in stacks]
-
-def main():
-    stack_depths = [10**ii for ii in range(7)]
-    min_runtimes = min_method_timer(stack_depths)
-    avg_mintime = avg(min_runtimes)
-    print()
-    print('Stack depths: ' + ', '.join(str(d) for d in stack_depths))
-    print('Average time to run stack.main(): {:6.3e} s'.format(avg_mintime))
 
 def plot_min_method_runtimes(stack_depths):
     """Generate a list of runtimes of the min method called on Stacks of depths
@@ -108,4 +102,5 @@ def plot_min_method_runtimes(stack_depths):
     plt.show()
 
 if __name__ == '__main__':
-    plot_min_method_runtimes([5**i for i in range(10)])
+    stack_depths = [5**i for i in range(10)]
+    plot_min_method_runtimes(stack_depths)
